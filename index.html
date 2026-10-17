@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>be;school | مدرسة البرمجة - مراجعة الوحدة الثانية: الأمن السيبراني</title>
+    <!-- Tailwind CSS & FontAwesome & Google Fonts Cairo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandOrange: { DEFAULT: '#FF5500', dark: '#E04A00', light: '#FFF4ED' },
+                        brandNavy: { DEFAULT: '#0B1B48', light: '#14285D', dark: '#07112E' },
+                        pageBg: '#F8FAFC'
+                    },
+                    fontFamily: { cairo: ['Cairo', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Cairo', sans-serif; background-color: #F8FAFC; color: #0B1B48; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #E2E8F0; border-radius: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #0B1B48; border-radius: 8px; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-pageBg text-brandNavy font-cairo">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-3 space-x-reverse">
+                <div dir="ltr" class="inline-block leading-none text-center p-1">
+                    <span class="text-2xl font-black tracking-tight text-brandOrange">be<span class="text-brandOrange">;</span></span><span class="text-2xl font-black tracking-tight text-brandNavy">school</span>
+                    <div class="text-[10px] font-bold text-brandNavy tracking-wider mt-0.5" dir="rtl">مدرسة البرمجة</div>
+                </div>
+                <div class="hidden sm:block border-r border-slate-200 pr-3 mr-1">
+                    <h1 class="text-sm font-bold text-brandNavy">مراجعة الوحدة الثانية: الأمن السيبراني</h1>
+                    <p class="text-xs text-slate-500">مادة البرمجة والذكاء الاصطناعي - الصف الثاني الثانوي</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2 space-x-reverse">
+                <div id="user-header-info" class="hidden items-center space-x-3 space-x-reverse bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-semibold">
+                    <div>👤 الطالب: <span id="hdr-name" class="text-brandNavy font-bold"></span></div>
+                    <button onclick="confirmExit()" class="mr-2 px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-brandNavy rounded-lg transition text-xs font-bold">
+                        <i class="fa-solid fa-right-from-bracket ml-1"></i> إنهاء
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow flex flex-col max-w-7xl w-full mx-auto p-4 sm:p-6">
+
+        <!-- Landing Screen -->
+        <section id="screen-landing" class="flex-grow flex items-center justify-center animate-fade-in my-auto">
+            <div class="bg-white rounded-3xl border border-slate-200 p-8 sm:p-12 max-w-2xl w-full text-center relative overflow-hidden">
+                <div dir="ltr" class="inline-block p-2 mb-4">
+                    <span class="text-4xl font-black text-brandOrange">be<span class="text-brandOrange">;</span></span><span class="text-4xl font-black text-brandNavy">school</span>
+                    <div class="text-sm font-bold text-brandNavy mt-1" dir="rtl">مدرسة البرمجة</div>
+                </div>
+
+                <h2 class="text-2xl sm:text-3xl font-black text-brandNavy mb-3">مراجعة الوحدة الثانية: الأمن السيبراني</h2>
+                <p class="text-slate-600 text-sm sm:text-base mb-8 leading-relaxed">
+                    مراجعة تفاعلية متقدمة لتقييم وفهم محاور الأمن السيبراني (التشفير، أمان الشبكات، وإدارة المخاطر) - 100 سؤال تحليلي واختياري
+                </p>
+
+                <div class="flex justify-center items-center">
+                    <button onclick="goToNameEntry()" class="w-full sm:w-auto px-10 py-4 bg-brandOrange hover:bg-brandOrange-dark text-white font-black text-lg rounded-2xl transition">
+                        ابدأ المراجعة التفاعلية 🎯
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Name Entry Screen -->
+        <section id="screen-name-entry" class="hidden flex-grow flex items-center justify-center animate-fade-in my-auto">
+            <div class="bg-white rounded-3xl border border-slate-200 p-8 sm:p-10 max-w-md w-full">
+                <div class="text-center mb-6">
+                    <div dir="ltr" class="inline-block mb-3">
+                        <span class="text-xl font-black text-brandOrange">be<span class="text-brandOrange">;</span></span><span class="text-xl font-black text-brandNavy">school</span>
+                    </div>
+                    <h3 class="text-xl font-black text-brandNavy">تسجيل اسم الطالب</h3>
+                    <p class="text-xs text-slate-500 mt-1">الرجاء إدخال اسمك الكريم لبدء المراجعة</p>
+                </div>
+
+                <form id="student-form" onsubmit="startAssessment(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-brandNavy mb-1">اسم الطالب <span class="text-brandOrange">*</span></label>
+                        <input type="text" id="input-name" required placeholder="مثال: أحمد محمد علي" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-brandOrange text-sm transition">
+                    </div>
+                    <button type="submit" class="w-full mt-2 py-3.5 bg-brandNavy hover:bg-brandNavy-light text-white font-black rounded-xl transition">
+                        دخول المراجعة والشروع في الحل 🚀
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Main Assessment Platform -->
+        <section id="screen-main-platform" class="hidden flex-grow flex flex-col animate-fade-in">
+            <div class="bg-white rounded-2xl border border-slate-200 p-4 mb-4 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center space-x-3 space-x-reverse">
+                    <div class="bg-brandOrange/10 text-brandOrange px-3 py-1.5 rounded-xl text-xs font-black">
+                        <i class="fa-solid fa-shield-halved ml-1"></i> مراجعة تفاعلية: الوحدة الثانية (100 سؤال تحليلي)
+                    </div>
+                    <div class="text-xs text-slate-500 hidden sm:block">
+                        الأمن السيبراني (التشفير، أمان الشبكات، الاستجابة للحوادث)
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3 space-x-reverse">
+                    <div id="progress-text" class="text-xs font-bold text-brandNavy">
+                        تمت الإجابة على: <span id="answered-count" class="text-brandOrange">0</span> / 100
+                    </div>
+                    <button onclick="finishAssessment()" class="px-5 py-2 bg-brandNavy hover:bg-brandNavy-light text-white font-bold text-xs rounded-xl transition">
+                        إنهاء المراجعة ورصد النتيجة
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 flex-grow">
+                <!-- Question Area -->
+                <div class="lg:col-span-3 bg-white rounded-2xl border border-slate-200 p-6 flex flex-col justify-between">
+                    <div id="question-content-area">
+                        <div class="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
+                            <span id="q-badge" class="px-3 py-1 bg-slate-100 text-brandNavy text-xs font-black rounded-lg">السؤال رقم 1</span>
+                            <span id="q-category" class="text-xs font-bold text-slate-500">الوحدة الثانية - الأمن السيبراني (مراجعة متقدمة)</span>
+                        </div>
+
+                        <h3 id="q-text" class="text-base sm:text-lg font-bold text-brandNavy mb-6 leading-relaxed"></h3>
+
+                        <div id="q-options" class="space-y-3 mb-6"></div>
+                    </div>
+
+                    <div class="flex items-center justify-between border-t border-slate-100 pt-4 mt-4">
+                        <button onclick="prevQuestion()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-brandNavy font-bold rounded-xl text-xs transition flex items-center">
+                            <i class="fa-solid fa-arrow-right ml-1"></i> السابق
+                        </button>
+                        <div class="text-xs font-bold text-slate-400">استخدم جدول التنقل السريع للقفز لأي سؤال</div>
+                        <button onclick="nextQuestion()" class="px-4 py-2 bg-brandNavy hover:bg-brandNavy-light text-white font-bold rounded-xl text-xs transition flex items-center">
+                            التالي <i class="fa-solid fa-arrow-left mr-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Matrix Navigation Grid -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-4 flex flex-col">
+                    <div class="font-bold text-brandNavy text-xs mb-2 flex items-center justify-between">
+                        <span>مصفوفة انتقال الأسئلة (10x10)</span>
+                        <span class="text-[10px] text-slate-400">برتقالي: مجاب | رمادي: غير مجاب</span>
+                    </div>
+                    <div class="text-[11px] text-slate-500 mb-3">اضغط على أي رقم للذهاب للسؤال مباشرة</div>
+                    
+                    <div id="matrix-grid" class="grid grid-cols-10 gap-1.5 overflow-y-auto max-h-[380px] custom-scrollbar p-1"></div>
+
+                    <div class="mt-auto pt-4 border-t border-slate-100 space-y-2 text-xs">
+                        <div class="flex justify-between items-center text-slate-600 font-semibold">
+                            <span>الأسئلة المجابة:</span>
+                            <span id="stat-answered" class="text-brandNavy font-bold">0 / 100</span>
+                        </div>
+                        <button onclick="finishAssessment()" class="w-full py-2.5 bg-brandNavy hover:bg-brandNavy-light text-white font-black rounded-xl text-xs transition">
+                            إنهاء المراجعة وإصدار النتيجة 🎯
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Screen -->
+        <section id="screen-results" class="hidden flex-grow flex flex-col animate-fade-in my-auto">
+            <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 max-w-4xl w-full mx-auto my-6 text-center">
+                
+                <div id="result-badge-icon" class="w-20 h-20 rounded-full mx-auto flex items-center justify-center text-4xl mb-4 bg-brandOrange/10 text-brandOrange"></div>
+
+                <div dir="ltr" class="inline-block mb-2">
+                    <span class="text-lg font-black text-brandOrange">be<span class="text-brandOrange">;</span></span><span class="text-lg font-black text-brandNavy">school</span>
+                </div>
+
+                <h2 id="result-title" class="text-2xl sm:text-3xl font-black mb-2 text-brandNavy">تقرير نتيجة المراجعة التفاعلية - الوحدة الثانية</h2>
+                <p id="student-summary-info" class="text-sm text-slate-600 mb-6 font-semibold"></p>
+
+                <!-- Dashboard Summary Cards -->
+                <div class="grid grid-cols-3 gap-3 mb-6">
+                    <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
+                        <div class="text-xs text-slate-500 font-bold mb-1">الدرجة النهائية</div>
+                        <div class="text-2xl sm:text-3xl font-black text-brandNavy"><span id="final-score">0</span> / 100</div>
+                    </div>
+                    <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-4">
+                        <div class="text-xs text-emerald-600 font-bold mb-1">إجابات صحيحة</div>
+                        <div id="res-correct-count" class="text-2xl sm:text-3xl font-black text-emerald-700">0</div>
+                    </div>
+                    <div class="bg-rose-50 border border-rose-200 rounded-2xl p-4">
+                        <div class="text-xs text-rose-600 font-bold mb-1">أخطاء أو متروكة</div>
+                        <div id="res-wrong-count" class="text-2xl sm:text-3xl font-black text-rose-700">0</div>
+                    </div>
+                </div>
+
+                <!-- Dashboard Matrix of Results -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 mb-6">
+                    <div class="flex items-center justify-between mb-2 text-xs font-bold text-brandNavy">
+                        <span>لوحة تتبع نتائج الأسئلة (1 إلى 100)</span>
+                        <span class="text-[10px] text-slate-500"><i class="fa-solid fa-square text-emerald-500 ml-1"></i> صحيح | <i class="fa-solid fa-square text-rose-500 ml-1"></i> خطأ/متروك</span>
+                    </div>
+                    <div id="results-matrix-grid" class="grid grid-cols-10 sm:grid-cols-20 gap-1.5 max-h-[160px] overflow-y-auto custom-scrollbar p-1"></div>
+                </div>
+
+                <div id="result-card-box" class="rounded-2xl p-6 mb-6 border border-slate-200 bg-slate-50">
+                    <div id="final-percentage" class="text-xl font-bold mb-3 text-brandOrange">0%</div>
+                    <div id="pedagogical-message" class="text-sm sm:text-base font-black leading-relaxed px-4 py-3 rounded-xl bg-white border border-slate-200 text-brandNavy"></div>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button onclick="reviewAllAnswers('all')" class="px-6 py-3.5 bg-brandNavy hover:bg-brandNavy-light text-white font-black rounded-xl transition flex items-center text-sm">
+                        <i class="fa-solid fa-book-open ml-2 text-lg"></i> مراجعة جميع الأسئلة والتأصيل العلمي (100 سؤال)
+                    </button>
+                    <button onclick="reviewAllAnswers('wrong')" class="px-6 py-3.5 bg-brandOrange hover:bg-brandOrange-dark text-white font-black rounded-xl transition flex items-center text-sm">
+                        <i class="fa-solid fa-triangle-exclamation ml-2 text-lg"></i> مراجعة أخطائي فقط وتصحيحها 🎯
+                    </button>
+                    <button onclick="resetPlatform()" class="px-6 py-3.5 bg-slate-100 hover:bg-slate-200 text-brandNavy font-black rounded-xl transition flex items-center text-sm">
+                        <i class="fa-solid fa-rotate-right ml-2 text-lg"></i> إعادة المراجعة من جديد
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Review Modal -->
+        <div id="review-modal" class="hidden fixed inset-0 z-50 bg-brandNavy/60 backdrop-blur-sm flex items-center justify-center p-4">
+            <div class="bg-white rounded-3xl border border-slate-200 max-w-3xl w-full max-h-[85vh] flex flex-col overflow-hidden animate-fade-in">
+                <div class="p-4 sm:p-6 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+                    <h3 id="review-modal-title" class="font-black text-brandNavy text-base sm:text-lg">مراجعة الأسئلة وتصحيح الأخطاء والتأصيل العلمي</h3>
+                    <button onclick="closeReviewModal()" class="w-8 h-8 rounded-full bg-slate-200 hover:bg-slate-300 flex items-center justify-center transition font-bold text-brandNavy">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div id="review-modal-body" class="p-6 overflow-y-auto custom-scrollbar space-y-6 flex-grow"></div>
+                <div class="p-4 border-t border-slate-200 bg-slate-50 text-center">
+                    <button onclick="closeReviewModal()" class="px-6 py-2.5 bg-brandNavy text-white font-bold rounded-xl text-xs">إغلاق المراجعة</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Custom Alert Modal -->
+        <div id="custom-modal" class="hidden fixed inset-0 z-50 bg-brandNavy/60 backdrop-blur-sm flex items-center justify-center p-4">
+            <div class="bg-white rounded-2xl max-w-sm w-full p-6 text-center animate-fade-in border border-slate-200">
+                <div id="modal-icon" class="text-3xl text-brandOrange mb-3"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                <h4 id="modal-title" class="text-base font-black text-brandNavy mb-2">تنبيه هام</h4>
+                <p id="modal-message" class="text-xs sm:text-sm text-slate-600 mb-6 leading-relaxed">رسالة هنا</p>
+                <div class="flex justify-center space-x-2 space-x-reverse" id="modal-buttons">
+                    <button onclick="closeModal()" class="px-5 py-2 bg-brandNavy text-white font-bold rounded-xl text-xs">حسناً</button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-4 mt-auto text-center text-xs text-slate-500 font-semibold">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+            <div dir="ltr" class="inline-flex items-center space-x-1 space-x-reverse">
+                <span class="font-black text-brandOrange">be<span class="text-brandOrange">;</span></span><span class="font-black text-brandNavy">school</span> <span class="text-slate-400">| مدرسة البرمجة © 2026</span>
+            </div>
+            <div>مراجعة تفاعلية: الوحدة الثانية - الأمن السيبراني (الصف الثاني الثانوي)</div>
+        </div>
+    </footer>
+
+    <script>
+        // 100 ADVANCED RIGOROUS UNIT 2 QUESTIONS (CYBERSECURITY: LESSONS 2-1, 2-2, 2-3)
+        const questionsData = [
+            // Lesson 2-1: Encryption & Authentication (1-35)
+            { id: 1, text: "أثناء إنشاء اتصال آمن عبر بروتوكول HTTPS، ما هي المرحلة التي يتم فيها تبادل الشهادات الرقمية وتوليد أسرار مشتركة تشتق منها مفاتيح الجلسة؟", options: ["مصافحة TLS (TLS Handshake)", "بروتوكول TCP المعياري", "التبادل المباشر عبر التشفير المتماثل", "جدار الحماية الفوري"], correct: 0, explanation: "مصافحة TLS هي الخطوة الأولى التي يتم فيها تبادل الشهادات والتحقق من هوية الخادم والاتفاق الآمن على مفاتيح الجلسة." },
+            { id: 2, text: "لماذا لا يتم استخدام التشفير بالمفتاح العام (Asymmetric Encryption) لتبادل جميع بيانات الجلسة طوال فترة التصفح؟", options: ["لأنه غير آمن تماماً", "لأنه بطيء ويسهّل التنصت", "لأنه يتطلب عمليات حسابية معقدة تجعله أبطأ بكثير من التشفير المتماثل", "لأنه يلغي الحاجة لشهادة SSL"], correct: 2, explanation: "التشفير بالمفتاح العام مكلف حسابياً وبطيء، لذا يُستخدم فقط في المصافحة وتوليد مفاتيح جلسة متماثلة سريعة." },
+            { id: 3, text: "أي من تقنيات الأمان التالية تمكن المتصفح من التحقق من أن الخادم الذي يتصل به هو الخادم الحقيقي المرتبط باسم النطاق وليس خادماً مزيفاً؟", options: ["التشفير المتماثل", "الشهادة الرقمية (Digital Certificate)", "المصادقة الثنائية (2FA)", "التوقيع الرقمي للعميل"], correct: 1, explanation: "الشهادة الرقمية تصدرها جهات معتمدة وتساعد المتصفح على التحقق من هوية الخادم وارتباط الشهادة باسم النطاق." },
+            { id: 4, text: "عندما يُطلب من المستخدم إدخال كلمة مرور ثم إدخال رمز مؤقت يُرسل عبر رسالة نصية قصيرة (SMS)، فإن هذه الطريقة تسمى:", options: ["المصادقة المتعددة العوامل من نفس الفئة", "المصادقة الثنائية (2FA) باستخدام عاملين من فئتين مختلفتين (المعرفة والحيازة)", "المصادقة الحيوية المتقدمة", "التشفير المتماثل للبيانات"], correct: 1, explanation: "المصادقة الثنائية تستخدم عاملين من فئتين مختلفتين تماماً مثل كلمة المرور (ما تعرفه) والرمز المرسل للهاتف (ما تحوزه)." },
+            { id: 5, text: "لماذا يُعتبر تعيين كلمتي مرور مختلفتين للحساب الواحد أمراً لا يحقق مصادقة ثنائية حقيقية (2FA)؟", options: ["لأنهما بطيئتان في التحميل", "لأن كلتيهما تنتميان لنفس فئة العامل وهي 'المعرفة' (Knowledge)", "لأنهما تخضعان للتشفير المتماثل فقط", "لأنهما تلغيان استخدام الشهادات الرقمية"], correct: 1, explanation: "المصادقة الثنائية الحقيقية تتطلب فئتين مختلفتين (مثل المعرفة + الحيازة أو السمات الحيوية)، وكلتيهما من فئة المعرفة لا تعتبرا ثنائية." },
+            { id: 6, text: "ما الخاصية الأمنية التي يضمنها التوقيع الرقمي (Digital Signature) في الاتصالات والرسائل الإلكترونية؟", options: ["منع قراءة الرسالة من أطراف ثالثة", "اكتشاف التلاعب بالرسالة، إثبات هوية المرسل، وتوفير دليل يدعم عدم التنصل (Non-repudiation)", "تسريع سرعة نقل البيانات عبر الألياف الضوئية", "توليد مفاتيح الجلسة المتماثلةة"], correct: 1, explanation: "التوقيع الرقمي يكتشف التلاعب ويؤكد هوية المرسل ويوفر دليلاً مانعاً للتنصل." },
+            { id: 7, text: "في تدفق اتصال HTTPS، بعد نجاح مصافحة TLS، أي نوع من التشفير يتم اعتماده لحماية بيانات الجلسة المتبادلة؟", options: ["التشفير بالمفتاح العام", "التشفير المتماثل (Symmetric Encryption)", "التشفير غير المتماثل المتقدم", "بدون تشفير نهائياً"], correct: 1, explanation: "بعد الاتفاق الآمن في المصافحة، يُستخدم التشفير المتماثل لحماية بيانات الجلسة بكفاءة وسرعة عالية." },
+            { id: 8, text: "إذا قام مخترق باعتراض حركة مرور البيانات على شبكة Wi-Fi عامة غير مشفرة، فما التقنية التي تحمي مستخدمي المواقع التي تعتمد على HTTPS من التنصت على محتواها؟", options: ["التشفير (Encryption) عبر بروتوكول TLS", "الشهادة الرقمية وحدها دون تشفير", "جدار الحماية المكتبي", "المنطقة المعزولة"], correct: 0, explanation: "التشفير يشفر محتوى الاتصال بالكامل أثناء النقل، مما يمنع أطراف ثالثة من قراءته حتى لو اعترضته." },
+            { id: 9, text: "أي من الخيارات التالية يمثل مثالاً صحيحاً لعامل 'السمات الحيوية' (Biometrics) في أنظمة المصادقة؟", options: ["رمز الاستجابة السريعة (QR Code)", "كلمة المرور المؤقتة (OTP)", "بصمة الإصبع أو التعرف على الوجه", "بطاقة الصراف الآلي الذكية"], correct: 2, explanation: "السمات الحيوية تعتمد على الخصائص الجسدية الفريدة للإنسان مثل بصمة الإصبع أو الوجه." },
+            { id: 10, text: "لماذا يُعد الجمع بين تقنيات أمان متعددة (التشفير، الشهادات، التوقيع، والمصادقة) في الخدمات الرقمية أفضل من الاعتماد على تقنية واحدة؟", options: ["لأنه يقلل تكلفة خوادم الاستضافة", "لأنه يعالج تهديدات متنوّعة في آن واحد (التنصت، التلاعب، انتحال الهوية، الدخول غير المصرح به)", "لأنه يلغي الحاجة لكلمات المرور تماماً", "لأنه يضاعف سرعة المعالج المركزي"], correct: 1, explanation: "تعدد الطبقات وتقنيات الأمان يقلل المخاطر المتعددة ويصعب اختراق النظام." },
+            { id: 11, text: "ماذا يقصد بمصطلح 'عدم التنصل' (Non-repudiation) المرتبط بالتوقيع الرقمي؟", options: ["عدم قدرة المستخدم على حذف حسابه", "استحالة إنكار المرسل لإرساله الرسالة أو المستند بعد توقيعه رقمياً", "عدم السماح للخادم بإعادة إرسال البيانات", "منع الخادم من قطع الاتصال بالعميل"], correct: 1, explanation: "عدم التنصل يعني عدم إمكانية إنكار صاحب التوقيع قيامه بالعملية." },
+            { id: 12, text: "أي من العناصر التالية لا يُعد جزءاً من سلسلة الثقة في الشهادات الرقمية؟", options: ["شهادة الجذر المعتمدة", "الشهادة الوسيطة", "شهادة الخادم", "كلمة مرور حساب المستخدم الشخصي"], correct: 3, explanation: "كلمة مرور المستخدم تخص المصادقة وليست جزءاً من سلسلة الثقة للشهادات الرقمية للخادم." },
+            { id: 13, text: "عندما يستخدم البنك تطبيق المصادقة (Authenticator App) لتوليد رموز متجددة كل 30 ثانية، فهذا يعتمد على فئة عامل:", options: ["المعرفة (Knowledge)", "الحيازة (Possession)", "السمات الحيوية (Biometrics)", "الموقع الجغرافي"], correct: 1, explanation: "امتلاك الهاتف أو الجهاز الذي يولد الرمز يُعتبر من عامل الحيازة." },
+            { id: 14, text: "ما الفارق الجوهري بين التشفير المتماثل وغير المتماثل في بنيتهما الأساسية؟", options: ["المتماثل يستخدم مفتاحين مختلفين، وغير المتماثل مفتاحاً واحداً", "المتماثل يستخدم مفتاحاً سرياً واحداً مشتركاً للتشفير وفك التشفير، بينما غير المتماثل يستخدم زوجاً من المفاتيح (عام وخاص)", "كلاهما لا يستخدمان مفاتيح", "غير المتماثل أسرع في نقل الملفات الضخمة"], correct: 1, explanation: "التشفير المتماثل يعتمد على مفتاح واحد، بينما غير المتماثل يعتمد على زوج مفاتيح (عام وخاص)." },
+            { id: 15, text: "لماذا يُطلب أحياناً إدخال رمز التحقق (OTP) المرسل عبر البريد الإلكتروني أو الهاتف عند تسجيل الدخول من جهاز جديد؟", options: ["لزيادة إعلانات الموقع", "لإضافية عامل حماية ثانٍ (2FA) يمنع الدخول حتى لو سرقت كلمة المرور", "لتحديث نظام تشغيل الجهاز تلقائياً", "لإلغاء تفعيل بروتوكول HTTPS"], correct: 1, explanation: "عامل التحقق الإضافي يحمي الحساب في حال معرفة الطرف المخترق لكلمة المرور الأساسية." },
+            { id: 16, text: "ما الغرض الرئيسي من عملية 'مصافحة TLS'؟", options: ["ضغط حجم البيانات المنقولة", "التحقق من هوية الخادم، الاتفاق على خوارزميات التشفير، واشتقاق مفاتيح الجلسة بأمان", "إرسال رسائل التبرع للموقع", "حذف الكوكيز المؤقتة"], correct: 1, explanation: "مصافحة TLS تؤمن الاتفاق وتتحقق من الهوية قبل بدء تبادل البيانات الفعلية." },
+            { id: 17, text: "أي من الحالات التالية يشير بوضوح إلى فشل أو مشكلة في الشهادة الرقمية لموقع إلكتروني أثناء التصفح؟", options: ["سرعة التحميل عالية جداً", "تحذير المتصفح من أن شهادة الموقع غير صالحة أو منتهية الصلاحية أو لا تتطابق مع اسم النطاق", "لون الخلفية أبيض ناصع", "وجود زر تسجيل دخول رئيسي"], correct: 1, explanation: "تحذير المتصفح يظهر عندما تكون الشهادة منتهية أو مزيفة أو تخص نطاقاً آخر." },
+            { id: 18, text: "كيف يسهم استخدام بروتوكول HTTPS في حماية 'سلامة البيانات' (Data Integrity) أثناء النقل؟", options: ["منع تعديل أو تلاعب القراصنة بالبيانات سرا دون اكتشاف ذلك", "تخزين نسخة من البيانات على جهاز المستخدم المحلي", "منع ظهور الإعلانات المزعجة", "ضغط الملفات النصية والكبيرة"], correct: 0, explanation: "سلامة البيانات تعني اكتشاف أي تعديل غير مصرح به أثناء انتقالها عبر الشبكة." },
+            { id: 19, text: "ما هو التعريف الأدق لمصطلح 'التشفير بالمفتاح العام' (Public Key Cryptography)؟", options: ["تشفير يُستخدم فيه مفتاح واحد سري يتبادله الطرفان علناً", "نظام يعتمد على زوج من المفاتيح المرتبطة، مفتاح عام يُنشر للجميع ومفتاح خاص يُحفظ بسرية تامة", "نظام يمنع تبادل الملفات عبر الإنترنت نهائياً", "بروتوكول لنقل صفحات الويب العادية"], correct: 1, explanation: "التشفير بالمفتاح العام يعتمد على مفتاح عام للتشفير ومفتاح خاص لفك التشفير." },
+            { id: 20, text: "أي من الخيارات التالية يمثل الفئة الثلاثية الشاملة لعوامل المصادقة المتعددة (MFA)؟", options: ["السرعة، التكلفة، الحجم", "المعرفة، الحيازة، السمات الحيوية", "العميل، الخادم، قاعدة البيانات", "التشفير، التوقيع، الشهادة"], correct: 1, explanation: "عوامل المصادقة الثلاثة المعترف بها هي: ما تعرفه، ما تحوزه، وما تملكه من سمات حيوية." },
+            { id: 21, text: "إذا قام مهاجم باعتراض رسالة موقعة رقمياً وقام بتغيير حرف واحد فيها، فماذا سيكشف المتصفح أو النظام المستلم؟", options: ["لن يلاحظ أي تغيير", "سيكشف فشل التحقق من التوقيع الرقمي ويعتبر الرسالة متلاعباً بها", "سيقوم بتعديل الحرف تلقائياً", "سيطلب إعادة تشغيل الجهاز"], correct: 1, explanation: "التوقيع الرقمي حساس جداً لأي تغيير طفيف، حيث ينهار التحقق إذا تم التلاعب بمحتوى الرسالة." },
+            { id: 22, text: "لماذا يُعد الاعتماد على كلمة مرور قوية وحدها غير كافٍ تماماً في البيئات الرقمية الحديثة؟", options: ["لأن كلمات المرور الطويلة تستهلك ذاكرة الخادم", "لإمكانية تسريبها عبر هجمات التصيد أو اختراق قواعد البيانات، مما يستوجب إضافة عامل ثانٍ", "لأن لغات البرمجة ترفض كلمات المرور", "لأنها تبطئ فتح المتصفح"], correct: 1, explanation: "تسريب كلمات المرور الشائع يجعل الحسابات عرضة للاختراق ما لم يحمها عامل مصادقة ثانٍ." },
+            { id: 23, text: "أي من البروتوكولات التالية يضيف طبقة الأمان وتشفير TLS لرسائل البريد الإلكتروني أو بيانات الويب؟", options: ["HTTP العادي", "HTTPS", "FTP البسيط", "Telnet"], correct: 1, explanation: "HTTPS هو بروتوكول HTTP المنقول عبر طبقة أمان TLS المؤمّنة." },
+            { id: 24, text: "ما الدور الذي تلعبه 'الهيئة المصدرة للشهادات' (Certificate Authority - CA)؟", options: ["تصميم واجهات المستخدم للمواكب", "التحقق من هوية مالك النطاق وإصدار الشهادات الرقمية الموثوقة", "إدارة قواعد البيانات السحابية", "توليد أكواد لغات البرمجة الأمامية"], correct: 1, explanation: "هيئات إصدار الشهادات (CA) هي جهات موثوقة تمنح الشهادات الرقمية بعد التحقق من الهوية." },
+            { id: 25, text: "عندما تقوم بتسجيل الدخول إلى بوابتك التعليمية باستخدام كلمة المرور وبصمة الإصبع، فأنت تستخدم:", options: ["مصادقة ثنائية بفئتين مختلفتين (المعرفة والسمات الحيوية)", "تشفير متماثل تام", "شهادة رقمية ذاتية السند", "توقيعاً رقمياً معتمداً"], correct: 0, explanation: "كلمة المرور (معرفة) وبصمة الإصبع (سمات حيوية) تمثلان مصادقة ثنائية من فئتين مختلفتين." },
+            { id: 26, text: "لماذا يُعد تبادل البيانات بعد مصافحة TLS أسرع بكثير من مراحل بدايتها؟", options: ["لأن الخادم يغلق اتصالاته الأخرى", "لأن استخدام التشفير المتماثل يتطلب طاقة حسابية أقل بكثير مقارنة بالتشفير غير المتماثل", "لأن سرعة الإنترنت تتضاعف تلقائياً", "لإلغاء فحص جدار الحماية"], correct: 1, explanation: "التشفير المتماثل خفيف حسابياً وسريع جداً في معالجة ونقل كتل البيانات الكبيرة." },
+            { id: 27, text: "أي من الخيارات التالية يوضح بدقة متطلبات الأمان عند نقل بيانات حساسة لعملاء بنك؟", options: ["استخدام HTTP مع كلمة مرور واحدة بسيطة", "استخدام HTTPS مشفر، مصادقة ثنائية (2FA)، وتجنب شبكات الاتصال غير الموثوقة", "الاعتماد على إرسال البريد الورقي", "تخزين الكلمات بصيغة نصية واضحة"], correct: 1, explanation: "الحماية القصوى تتطلب تشفيراً قوياً ومصادقة ثنائية وقنوات اتصال مؤمنة." },
+            { id: 28, text: "ما هي المشكلة الأمنية التي تعالجها الشهادات الرقمية في المقام الأول؟", options: ["بطء سرعة المعالج", "هجمات انتحال الهوية وخداع المواقع (Phishing / Man-in-the-Middle)", "كثرة الأخطاء البرمجية في CSS", "امتلاء مساحة القرص الصلب"], correct: 1, explanation: "الشهادات الرقمية تثبت هوية الخادم الحقيقي وتمنع انتحاله." },
+            { id: 29, text: "كيف يساهم التوقيع الرقمي في دعم 'إثبات الهوية'؟", options: ["من خلال تشفير الرسالة بالكامل بمفتاح سري لا يملكه سواه، مما يؤكد أن المرسل هو صاحب المفتاح", "عبر تلوين رسائل البريد باللون الأخضر", "من خلال إظهار صورة شخصية للمرسل", "عبر الاتصال الهاتفي المباشر بالعميل"], correct: 0, explanation: "استخدام المفتاح الخاص في التوقيع يثبت أن صاحب المفتاح وحده هو من أصدره." },
+            { id: 30, text: "ماذا يحدث إذا انقطعت الاتصالات أثناء مصافحة TLS قبل اكتمال اشتقاق مفاتيح الجلسة؟", options: ["يتم استكمال الاتصال بشكل غير آمن تلقائياً", "يفشل إنشاء الاتصال الآمن وترفض الأجهزة تبادل البيانات الحساسة", "يتم مسح القرص الصلب للخادم", "تتوقف الكهرباء عن الراوتر"], correct: 1, explanation: "إذا فشلت المصافحة أو لم تكتمل بأمان، يُقفل الاتصال ولا تبادل للبيانات الحساسة." },
+            { id: 31, text: "أي من العبارات التالية تصف العلاقة بين بروتوكول HTTP وبروتوكول TLS في بناء HTTPS؟", options: ["TLS يعمل كطبقة أمان فوق أو تحت بروتوكول HTTP لتشفير وحماية الرسائل المتبادلة", "HTTP يلغي عمل TLS نهائياً", "كلاهما يعملان بشكل منفصل تماماً دون تواصل", "TLS هو بديل لمتصفح الويب"], correct: 0, explanation: "HTTPS يدمج بروتوكول نقل الويب HTTP مع طبقة الأمان للنقل TLS." },
+            { id: 32, text: "عندما تفقد هاتفك الذي يحتوي على تطبيق المصادقة (OTP)، ما العامل الذي يحمي حساباتك مؤقتاً حتى لو عرف المخترق كلمة المرور؟", options: ["أن المخترق لا يملك الهاتف المادي (عامل الحيازة المطلق للرمز المتجدد)", "أن الحسابات تحذف نفسها تلقائياً", "أن كلمة المرور تتغير وحدها", "أن المتصفح يمنع الدخول نهائياً"], correct: 0, explanation: "عامل الحيازة (الهاتف الفعلي) يمنع المخترق من توليد رمز OTP المطلوب." },
+            { id: 33, text: "أي من الخيارات التالية يُعد مثالاً على 'الخداع والتلاعب' الذي يحاربه التوقيع والشهادات الرقمية؟", options: ["توجيه المستخدم لموقع بنكي مزيف يطابق تماماً الشكل الحقيقي لسرقة بياناته", "انقطاع التيار الكهربائي المفاجئ", "بطء تدفق البيانات عبر كابلات الألياف", "نسخ ملفات الوسائط المتعددة"], correct: 0, explanation: "المواقع المزيفة تستهدف خداع المستخدمين، وهنا دور الشهادات والتحقق من النطاق." },
+            { id: 34, text: "لماذا تُصنف بطاقة الائتمان المزودة بشريحة ذكية مع رمز سري (PIN) ضمن المصادقة الثنائية في عمليات الشراء؟", options: ["لأنها تستخدم بطاقتين ورقيتين", "لأنها تجمع بين ما تحوزه (البطاقة الفعلية) وما تعرفه (الرمز السري PIN)", "لأنها تعمل بدون كهرباء", "لأنها مجانية بالكامل"], correct: 1, explanation: "البطاقة (حيازة) والرمز السري (معرفة) يمثلان مصادقة ثنائية دقيقة." },
+            { id: 35, text: "ما الخلاصة الأساسية لتقنيات التشفير والمصادقة في الأمن السيبراني؟", options: ["أنها تضمن حماية مطلقة بنسبة 100% ضد كل الهجمات", "أنها تقلل المخاطر بشكل كبير عبر طبقات متعددة من السرية والتحقق، مع غياب الضمان المطلق", "أنها مخصصة للحكومات فقط", "أنها تلغي الحاجة لمديري الأنظمة"], correct: 1, explanation: "الأمن السيبراني يقوم على تقليل المخاطر عبر طبقات ولا يوجد أمان مطلق بنسبة 100%." },
+
+            // Lesson 2-2: Network Security Design (36-70)
+            { id: 36, text: "ما هو الدور الأساسي لجدار الحماية (Firewall) في تصميم أمان شبكات المؤسسات؟", options: ["توليد مفاتيح التشفير المتماثل", "مراقبة حركة مرور الشبكة الواردة والصادرة والسماح بها أو منعها وفق قواعد أمنية محددة", "تخزين قواعد بيانات العملاء", "تسريع سرعة الإنترنت للموظفين"], correct: 1, explanation: "جدار الحماية يعمل كحارس بوابة يراقب المرور ويطبق قواعد السماح أو المنع." },
+            { id: 37, text: "ما مقصود بمفهوم 'الدفاع في العمق' (Defense in Depth) في أمان الشبكات؟", options: ["وضع جميع البيانات في غرفة سرية تحت الأرض", "تكديس طبقات متعددة من الضوابط الأمنية بحيث تضمن الطبقات الأخرى تقليل الخطر إذا فشلت إحداها", "الاعتماد على جدار حماية واحد قوي جداً", "إغلاق الشبكة أمام جميع المستخدمين"], correct: 1, explanation: "الدفاع في العمق يعني بناء طبقات حماية متداخلة لئلا يؤدي خرق واحد لكشف النظام بأكمله." },
+            { id: 38, text: "ما الغرض الرئيسي من استخدام 'المنطقة المعزولة' (DMZ - Demilitarized Zone)؟", options: ["وضع خوادم الويب العامة والخدمات المواجهة للجمهور في منطقة منفصلة عن الشبكة الداخلية الحساسة", "عزل أجهزة الموظفين عن بعضها البعض", "تخزين النسخ الاحتياطية الباردة", "منع وصول الإنترنت للشركات نهائياً"], correct: 0, explanation: "المنطقة المعزولة تعزل الخوادم العامة عن الشبكة الداخلية لحماية قواعد البيانات إذا اختُرق الخادم." },
+            { id: 39, text: "كيف تحمي الشبكة الافتراضية الخاصة (VPN) الاتصالات عند استخدام شبكة Wi-Fi عامة غير موثوقة؟", options: ["عبر إنشاء نفق مشفر يحمي البيانات المنقولة بين جهاز المستخدم وشبكة المؤسسة من التنصت", "عبر تغيير كلمة مرور الواي فاي تلقائياً", "عبر منع الأجهزة الأخرى من الاتصال بالشبكة", "عبر تسريع سرعة التصفح"], correct: 0, explanation: "الـ VPN تنشئ نفقاً مشفراً يحمي البيانات عبر الشبكات العامة." },
+            { id: 40, text: "ما الفرضية الأمنية الأساسية التي يعتمد عليها 'نهج انعدام الثقة' (Zero Trust)؟", options: ["الثقة في جميع الموظفين القدامى", "عدم منح الثقة تلقائياً لمستخدم أو جهاز لمجرد وجوده داخل الشبكة، والتحقق المستمر من الهوية والسياق", "اعتبار كل ما هو خارج الشركة خطراً وكل ما في الداخل آمناً تماماً", "إلغاء كلمات المرور بالكامل"], correct: 1, explanation: "نهج انعدام الثقة لا يفترض الأمان المطلق للداخل، ويطلب التحقق من كل عملية وصول." },
+            { id: 41, text: "لماذا تراجعت كفاءة الأمان التقليدي القائم على حماية 'المحيط الأمني' وحده في بيئات العمل المعاصرة؟", options: ["بسبب انخفاض أسعار الخوادم", "بسبب انتشار الحوسبة السحابية والعمل عن بعد، مما أدى لتلاشي الخط الفاصل الواضح بين 'الداخل' و'الخارج'", "لأن جدران الحماية أصبحت قديمة ولا تعمل", "لأن المستخدمين لا يستخدمون كلمات مرور"], correct: 1, explanation: "السحابة والعمل عن بعد طمسا حدود المحيط الأمني التقليدي." },
+            { id: 42, text: "في نموذج الدفاع في العمق، أي من الطبقات التالية تمثل عادة الخط الدفاعي الأول على حدود الشبكة؟", options: ["برنامج مكافحة الفيروسات على الحاسوب الشخصي", "جدار الحماية (Firewall)", "قاعدة بيانات العملاء", "تطبيق الهاتف المحمول"], correct: 1, explanation: "جدار الحماية يمثل غالباً الطبقة الأولى عند مدخل الشبكة لمنع الاتصال غير المصرح به." },
+            { id: 43, text: "ما هو الإجراء الأمني الذي ينبغي تطبيقه لحماية خادم الويب العام من أن يكون نقطة انطلاق لاختراق قاعدة بيانات الرواتب الداخلية؟", options: ["وضعه داخل الشبكة الداخلية مباشرة", "عزله ووضعه في منطقة معزولة (DMZ)", "إلغاء تشفير الاتصال به", "منع الزوار من زيارته"], correct: 1, explanation: "وضع خادم الويب في DMZ يحمي الشبكة الداخلية وقاعدة البيانات حتى لو تعرض الخادم للهجوم." },
+            { id: 44, text: "أي من الاستخدامات التالية يُعد من أبرز فوائد الشبكة الافتراضية الخاصة (VPN) للمؤسسات؟", options: ["تمكين الموظفين عن بعد من الاتصال بأمان بشبكة المؤسسة وربط الفروع البعيدة", "توليد الشهادات الرقمية للمتصفحات", "تصميم الواجهات الأمامية لتطبيقات الويب", "فحص جودة المنتجات في المصانع"], correct: 0, explanation: "الـ VPN تستخدم للعمل عن بعد وربط الفروع بأمان." },
+            { id: 45, text: "إذا تعرض جهاز حاسوب طرفي لموظف لاختراق ببرمجية خبيثة، فما هي طبقة الدفاع في العمق التي تتولى منع انتشار الفيروس لداخل أجهزة الشبكة الأخرى؟", options: ["ضوابط الأجهزة الطرفية وجدار الحماية المحلي وبرامج مكافحة الفيروسات المحدثة", "إغلاق الشركة بالكامل", "تغيير اسم النطاق للموقع", "إلغاء بروتوكول HTTP"], correct: 0, explanation: "حماية الأجهزة الطرفية وتحديث برامج مكافحة الفيروسات تمثل الطبقة الرابعة للدفاع." },
+            { id: 46, text: "لماذا يُعتبر الاعتماد على جدار حماية واحد فقط لتأمين شبكة مؤسسة كبرى استراتيجية محفوفة بالمخاطر؟", options: ["لأن جدران الحماية تستهلك طاقة كبيرة", "لأنه إذا تمكن المهاجم من اختراق جدار الحماية الوحيد، فسيحصل على وصول حر وكامل لكافة موارد الشبكة الداخلية", "لأن جدران الحماية لا تعمل مع لغة بايثون", "لأنها تمنع الموظفين من تصفح البريد"], correct: 1, explanation: "سقوط خط الدفاع الوحيد يعني كشف النظام بأكمله، وهنا تبرز أهمية الدفاع في العمق." },
+            { id: 47, text: "ما الذي يميز 'نهج انعدام الثقة' (Zero Trust) عن نموذج الأمان التقليدي؟", options: ["التقليدي يثق في الأجهزة الداخلية تلقائياً، بينما Zero Trust يتحقق من كل طلب وصول بغض النظر عن مصدره", "Zero Trust لا يحتاج لكلمات مرور أبداً", "الأمان التقليدي أحدث وأكثر كفاءة من السحابي", "Zero Trust مخصص للمستخدمين الخارجيين فقط"], correct: 0, explanation: "الأمان التقليدي يفترض أمان الداخل، بينما Zero Trust يشك ويتحقق من كل عملية وصول." },
+            { id: 48, text: "أي من الخيارات التالية يمثل العنصر الذي يتم وضعه عادة داخل المنطقة المعزولة (DMZ)؟", options: ["خادم قواعد البيانات المالية الحساسة للمؤسسة", "خادم الويب العام وخادم البريد الإلكتروني المواجه للجمهور", "أجهزة الحاسوب الشخصية للمديرين التنفيذيين", "أرشيف الملفات الورقية القديمة"], correct: 1, explanation: "الخوادم المواجهة للجمهور والخارج هي التي توضع في الـ DMZ." },
+            { id: 49, text: "عندما يتصل موظف بشبكة إنترنت في مقهى عام ويحتاج لتصفح ملفات الشركة السرية بأمان، فما هي التقنية الواجب عليه تشغيلها؟", options: ["بروتوكول HTTP العادي", "شبكة افتراضية خاصة (VPN)", "متصفح خفي بدون تاريخ", "إعادة تشغيل الراوتر"], correct: 1, explanation: "الـ VPN تشفر الاتصال عبر الشبكات العامة وغير الموثوقة مثل شبكات المقاهي." },
+            { id: 50, text: "ما هو الهدف من تطبيق سياسات التحقق من 'السياق والهوية' في نهج انعدام الثقة؟", options: ["معرفة مكان تواجد الموظف وساعة عمله وصلاحيات جهازه للتأكد من مشروعية الطلب", "زيادة سرعة معالجة الرسوميات", "منع استخدام الهواتف الذكية في العمل", "إلغاء دور جدار الحماية تماماً"], correct: 0, explanation: "فحص السياق والهوية يتضمن التحقق من هوية المستخدم وصلاحياته وحالة الجهاز وسياق الطلب." },
+            { id: 51, text: "أي طبقة من طبقات الدفاع في العمق تختص بتشفير مسار الاتصال بين الأجهزة المتباعدة؟", options: ["طبقة مدخل الشبكة", "طبقة مسار الاتصال (مثل VPN وتشفير القنوات)", "طبقة وضع الخوادم", "طبقة الأجهزة الطرفية"], correct: 1, explanation: "مسار الاتصال يتضمن تشفير قنوات النقل مثل الشبكات الافتراضية الخاصة." },
+            { id: 52, text: "لماذا يُعد فصل الشبكة الداخلية عن الشبكة الخارجية عبر DMZ إجراءً يقلل من نطاق التأثير عند الهجمات؟", options: ["لأنه يمنع انتقال المخترق من الخادم العام المخترق إلى قواعد البيانات الداخلية بسهولة", "لأنه يلغي استخدام كلمات المرور", "لأنه يسرع سرعة تحميل الملفات", "لنه يمنع انقطاع التيار الكهربائي"], correct: 0, explanation: "العزل يحد من انتشار الضرر ويحمي الموارد الحساسة الداخلية." },
+            { id: 53, text: "ما الذي يعبر عنه مصطلح 'المحيط الأمني' (Security Perimeter) في سياق أمان الشبكات؟", options: ["الحدود التقنية التقليدية التي تفصل شبكة المؤسسة الداخلية الموثوقة عن الإنترنت الخارجي غير الموثوق", "سرعة نقل البيانات عبر الكابلات", "مساحة مكتب الموظفين بالمؤسسة", "عدد الخوادم الموجودة في السحابة"], correct: 0, explanation: "المحيط الأمني هو الخط الفاصل التقليدي بين داخل الشركة وخارجها." },
+            { id: 54, text: "كيف يتعامل جدار الحماية مع حزم البيانات الواردة إلى الشبكة؟", options: ["يقوم بحذفها كلها عشوائياً", "يقارنها بقواعد الأمان والإعدادات المسبقة، فإما أن يسمح بمرورها أو يمنعها", "يقوم بطباعتها على الطابعة", "يحولها إلى ملفات صوتية"], correct: 1, explanation: "جدار الحماية يطبق القواعد الموضوعة ليسمح أو يمنع الحزم." },
+            { id: 55, text: "أي من الخيارات التالية لا يُعد من استخدامات الشبكة الافتراضية الخاصة (VPN)؟", options: ["الاتصال بأمان بشبكة المؤسسة من المنزل", "ربط الفروع والمكاتب البعيدة للمؤسسة بشبكة واحدة مؤمنة", "تسريع ألعاب الفيديو الجماعية عبر الإنترنت بدون خوادم", "تشفير محتوى الاتصال على شبكة عامة"], correct: 2, explanation: "تسريع الألعاب ليس من الاستخدامات الأمنية للـ VPN." },
+            { id: 56, text: "ما هي المخاطر الأمنية المترتبة على اعتبار الموظفين داخل مقر العمل موثوقين بالمطلق (الأمان التقليدي القديم)؟", options: ["استهلاك طاقة الكهرباء", "إذا قام مخترق بتسريب حساب موظف أو زرع برمجية خبيثة داخلياً، فسيتحرك بحرية دون رقابة إضافية", "بطء تشغيل شاشات الحواسيب", "توقف تحديثات نظام التشغيل"], correct: 1, explanation: "الثقة العمياء للداخل تجعل النظام عرضة للاختراق الداخلي بسهولة." },
+            { id: 57, text: "في تصميم شبكة مستشفى يربط بين الأطباء عن بعد وقاعدة بيانات المرضى، ما أهمية تطبيق نهج انعدام الثقة؟", options: ["منع الأطباء من العمل ليلاً", "التأكد من التحقق من صلاحيات وهوية كل طبيب وجهاز قبل السماح بالوصول للسجلات الطبية", "إلغاء استخدام أجهزة حاسوب اللابتوب", "تخفيض رواتب العاملين بالمستشفى"], correct: 1, explanation: "نهج انعدام الثقة يضمن التحقق الدائم من صلاحيات وهويات الأطباء والمستخدمين." },
+            { id: 58, text: "ما هو الإجراء الوقائي في طبقة 'الأجهزة الطرفية' لحماية شبكة المؤسسة؟", options: ["تثبيت برامج مكافحة الفيروسات، وتحديث أنظمة التشغيل، وتقييد الصلاحيات المحلية", "توسيع مساحة الشاشات", "إلغاء استخدام لوحة المفاتيح", "توصيل الراوتر بالشمس"], correct: 0, explanation: "حماية الأجهزة الطرفية تشمل برامج الحماية وتحديثات الأنظمة." },
+            { id: 59, text: "لماذا تُعد الحوسبة السحابية سبباً رئيسياً في تآكل مفهوم المحيط الأمني التقليدي؟", options: ["لأن البيانات والخدمات أصبحت موزعة على خوادم سحابية خارج حدود مبنى المؤسسة المادي", "لأن السحابة تعمل بدون أجهزة", "لأنها تلغي الحاجة لبروتوكول HTTPS", "لأنها تمنع الوصول للإنترنت"], correct: 0, explanation: "السحابة جعلت الموارد خارج الجدران المادية للشركة، مما أطاح بالمحيط التقليدي." },
+            { id: 60, text: "كيف يسهم تكديس إجراءات متعددة في تقليل احتمالية اختراق نظام الشبكة؟", options: ["عبر زيادة تعقيد مهمة المهاجم، حيث يتطلب تجاوزه تخطي عدة حواجز أمنية مستقلة", "عبر تقليل عدد الموظفين بالشركة", "عبر إغلاق الشبكة أيام العطلات", "عبر منع تحديث البرامج"], correct: 0, explanation: "تكديس الدفاعات يصعّب المهمة على المهاجم ويقلل احتمالية نجاحه." },
+            { id: 61, text: "ماذا يعني وضع خادم بريد إلكتروني في المنطقة المعزولة (DMZ)؟", options: ["جعله في متناول الهجمات الخارجية مع حماية الشبكة الداخلية الحساسة وراء جدار حماية ثانٍ", "حذفه نهائياً من الشبكة", "جعله يعمل بدون إنترنت", "تشفير رسائله بمفتاح عام واحد"], correct: 0, explanation: "وضع الخادم في DMZ يعزله عن شبكة الشركة الداخلية لحمايتها." },
+            { id: 62, text: "أي من السياسات التالية تتماشى مع مبدأ 'انعدام الثقة' عند طلب موظف الوصول لمجلد سري؟", options: ["السماح له فوراً لأنه يعمل بالشركة منذ سنة", "التحقق من هويته، وفحص الجهاز المستخدم، والتأكد من حاجته الفعلية للوصول لهذا المجلد سياقاً", "إعطاؤه صلاحيات المدير العام الكاملة", "تجاهل طلبه تماماً"], correct: 1, explanation: "Zero Trust يتحقق من الهوية والجهاز وسياق الطلب قبل منح الصلاحية." },
+            { id: 63, text: "ما هي المشكلة التي يعالجها استخدام الشبكة الافتراضية الخاصة (VPN) للمؤسسات التي لها فروع متعددة بمدن مختلفة؟", options: ["توحيد أسعار الخدمات", "ربط هذه الفروع بشبكة خاصة مؤمنة ومشفرة عبر الإنترنت العام", "إلغاء الحاجة لخطوط الهواتف", "منع الموظفين من السفر"], correct: 1, explanation: "ربط الفروع بأمان يعد من الاستخدامات الأساسية للـ VPN." },
+            { id: 64, text: "كيف يعمل جدار الحماية على مستوى المضيف (Host-based Firewall)؟", options: ["يحمي شبكة الشركة بأسرع ما يمكن", "يراقب ويتحكم في حركة المرور الواردة والصادرة لجهاز حاسوب فردي محدد", "ينظم درجة حرارة غرفة الخوادم", "يوزع الإنترنت على الأجهزة لاسلكياً"], correct: 1, explanation: "جدار حماية المضيف يحمي جهازاً واحداً (مثل حاسوب المستخدم)." },
+            { id: 65, text: "لماذا يُعد تصميم أمان الشبكات عملية هندسية تعتمد على التخطيط المستمر وليست منتجاً يُشترى لمرة واحدة؟", options: ["لتغير طبيعة التهديدات السيبرانية وابتكار المهاجمين لطرق جديدة باستمرار", "لأن البرامج تنتهي صلاحيتها كل يومين", "لتوفير ميزانية إضافية للشركة", "لأن اتصالات الإنترنت ثابتة لا تتغير"], correct: 0, explanation: "التطور المستمر للتهديدات يستوجب تحديث وتصميم أمان الشبكات باستمرار." },
+            { id: 66, text: "ما هو الأثر المتوقع لاختراق خادم ويب عام غير موضوع في المنطقة المعزولة (DMZ) داخل المؤسسة؟", options: ["لا يحدث شيئاً", "احتمالية وصول المهاجم مباشرة للشبكة الداخلية وقاعدة البيانات الحساسة للمؤسسة", "توقف الإعلانات التجارية", "زيادة سرعة الموقع"], correct: 1, explanation: "عدم العزل يسهّل على المخترق الانتقال لشبكة الشركة الداخلية." },
+            { id: 67, text: "أي من الخيارات التالية يمثل الطبقة الثانية في نموذج الدفاع في العمق المذكور في المنهج؟", options: ["مدخل الشبكة", "مسار الاتصال (مثل تشفير وتأمين قنوات النقل)", "الأجهزة الطرفية", "النسخ الاحتياطي اليدوي"], correct: 1, explanation: "الطبقة الثانية هي مسار الاتصال." },
+            { id: 68, text: "ما الذي يمنع موظفاً يعمل من منزله عبر VPN من التلاعب بالبيانات المرتبطة بالخادم الرئيسي؟", options: ["قواعد جدار الحماية، تشفير النفق، وسياسات الصلاحيات والتحقق الخاصة بالشبكة", "وجود كاميرا مراقبة بمنزله", "سرعة إنترنت منزله العالية", "عدم امتلاكه لوحة مفاتيح"], correct: 0, explanation: "الـ VPN وسياسات الأمان تتحكم في صلاحيات الوصول المشفر." },
+            { id: 69, text: "كيف يساهم تطبيق نهج انعدام الثقة في تقليل حجم الضرر عند اختراق حساب مستخدم؟", options: ["يسمح للمخترق بالتنقل في كل الأنظمة", "يحدد الصلاحيات بدقة ويمنع الوصول التلقائي للموارد الأخرى دون تحقق إضافي وسياق سليم", "يغلق حاسوب الشركة نهائياً", "يحذف كلمة المرور"], correct: 1, explanation: "الصلاحيات المحدودة والتحقق المستمر يمنعان المخترق من السيطرة التامة." },
+            { id: 70, text: "ما الخلاصة الهندسية لتصميم أمان الشبكات الحديثة؟", options: ["الاعتماد على جهاز راوتر واحد قوي", "تكديس طبقات الدفاع (الدفاع في العمق)، عزل الخدمات العامة (DMZ)، واعتماد التحقق المستمر (Zero Trust)", "منع الموظفين من الاتصال بالإنترنت", "الاستغناء عن كلمات المرور نهائياً"], correct: 1, explanation: "الخلاصة هي تكديس الدفاعات وعزل الخوادم وعدم الثقة التلقائية." },
+
+            // Lesson 2-3: Incident Response & Risk Management (71-100)
+            { id: 71, text: "ما هو التعريف الأدق لمصطلح 'الحادث الأمني' (Security Incident) في الأمن السيبراني؟", options: ["شراء أجهزة حاسوب جديدة للمؤسسة", "حدث يؤثر في سرية المعلومات أو سلامتها أو توافرها، أو يهددها بجدية، أو يخالف سياسة أمنية", "تحديث نظام تشغيل الهواتف الذكية", "زيادة أرباح الشركة التجارية"], correct: 1, explanation: "الحادث الأمني هو تهديد أو خرق يمس سرية أو سلامة أو توافر البيانات أو يخالف السياسة." },
+            { id: 72, text: "ما هي المراحل الست للاستجابة للحوادث الأمنية حسب النموذج التعليمي المبسط بالترتيب الصحيح؟", options: ["الاستعادة -> الاحتواء -> الاكتشاف -> التحضير -> الإزالة -> الوقاية", "التحضير -> الاكتشاف -> الاحتواء -> إزالة التهديد (الاستئصال) -> الاستعادة -> الدروس المستفادة والتحسين", "الاكتشاف -> التحضير -> الاستعادة -> الاحتواء -> الإزالة -> الدروس", "الوقاية -> الاستعادة -> التحضير -> الاحتواء -> الاكتشاف -> التقييم"], correct: 1, explanation: "التسلسل السليم هو: التحضير، الاكتشاف، الاحتواء، الاستئصال، الاستعادة، والدروس المستفادة والتحسين." },
+            { id: 73, text: "لماذا يُعد تنفيذ مرحلة 'الاحتواء' (Containment) ضرورياً ويجب أن يسبق مرحلة 'الاستئصال' (Eradication)؟", options: ["لأنه يمنع انتشار الضرر واتساع نطاق الاختراق ريثما يتم التخلص من جذر المشكلة", "لأنه ينهي عمل الخوادم نهائياً", "لأنه يقلل تكلفة إصلاح الأجهزة", "لأنه يلغي الحاجة للنسخ الاحتياطي"], correct: 0, explanation: "الاحتواء يوقف النزيف ويمنع انتشار البرمجية الخبيثة قبل البدء في استئصالها." },
+            { id: 74, text: "كيف يتم تقدير درجة الخطر (Risk Level) في النموذج المبسط لتقييم المخاطر؟", options: ["التأثير + الاحتمالية", "درجة التأثير (Impact) × درجة الاحتمالية (Probability)", "التأثير - الاحتمالية", "التأثير ÷ الاحتمالية"], correct: 1, explanation: "درجة الخطر تحسب بضرب التأثير في الاحتمالية." },
+            { id: 75, text: "وفقاً لمصفوفة تقييم المخاطر، ما هي الفئة التي تمثل أعلى أولوية ويجب معالجتها أولاً؟", options: ["المخاطر ذات التأثير المنخفض والاحتمالية المنخفضة", "المخاطر ذات التأثير المرتفع والاحتمالية المرتفعة", "المخاطر ذات التأثير المنخفض والاحتمالية المرتفعة", "المخاطر ذات التأثير المتوسط والاحتمالية المنخفضة"], correct: 1, explanation: "المخاطر ذات التأثير المرتفع والاحتمالية المرتفعة لها الأولوية القصوى للمعالجة." },
+            { id: 76, text: "ماذا تتضمن مرحلة 'الاستعادة' (Recovery) في الاستجابة للحوادث الأمنية؟", options: ["إعادة الأنظمة والخدمات إلى حالة تشغيل آمنة وطبيعية، والتي قد تشمل الاستعادة من نسخة احتياطية سليمة", "حذف جميع موظفي الشركة", "شراء أجهزة حاسوب جديدة بديلة", "كتابة تقرير أرباح الشركة السنوي"], correct: 0, explanation: "الاستعادة تعيد الأنظمة للوضع الآمن الطبيعي وقد تشمل استعادة النسخ الاحتياطية." },
+            { id: 77, text: "أي من الخيارات التالية يمثل حادثاً أمنياً يؤثر في 'توافر الخدمة' (Availability)؟", options: ["تسرب معلومات العملاء السرية", "تعديل درجات الطلاب في قاعدة البيانات دون إذن", "توقف موقع الويب بالكامل عن العمل بسبب هجوم حجب الخدمة (DDoS)", "نسخ ملفات العمل وتخزينها محلياً"], correct: 2, explanation: "انقطاع الخدمة وعدم توفرها يمس عنصر التوافر (Availability)." },
+            { id: 78, text: "ما الغرض من مرحلة 'الدروس المستفادة والتحسين' (Lessons Learned) كخطوة أخير في التعامل مع الحوادث؟", options: ["معاقبة الموظفين المتسببين في الخطأ فوراً", "تحليل ما حدث، توثيق الدروس، وتحسين الضوابط الأمنية لتقليل احتمال تكرار الحادث مستقبلاً", "إغلاق قسم تقنية المعلومات بالكامل", "تغيير اسم الشركة التجاري"], correct: 1, explanation: "الدروس المستفادة تهدف للتحليل وتطوير الدفاعات لمنع تكرار الخطأ." },
+            { id: 79, text: "ماذا يقصد بمصطلح 'التأثير' (Impact) في حساب المخاطر؟", options: ["مدى احتمال وقوع الحدث السيبراني", "مقدار الضرر أو الخسارة التي تلحق بالمؤسسة إذا وقع الحادث بالفعل", "سرعة استجابة فريق الطوارئ", "عدد الحواسيب المصابة بالفيروسات"], correct: 1, explanation: "التأثير يمثل حجم الضرر الناتج إذا تحقق الخطر." },
+            { id: 80, text: "في الاستجابة للحوادث الأمنية، ماذا تعني مرحلة 'التحضير' (Preparation)?", options: ["البحث عن الفيروسات بعد إصابة النظام", "إنشاء إجراءات، خطط، وهياكل استجابة مسبقاً استعداداً لأي حادث محتمل", "شراء برامج ألعاب ترفيهية للموظفين", "قطع اتصالات الإنترنت عن الشركة دائمًا"], correct: 1, explanation: "التحضير هو الاستعداد المسبق ووضع السياسات والخطط قبل وقوع الحادث." },
+            { id: 81, text: "ماذا يقصد بمصطلح 'الاحتمالية' (Probability) في مصفوفة المخاطر؟", options: ["حجم الخسارة المالية المتوقعة", "مدى احتمالية أو إمكانية وقوع الحدث الأمني أو الهجوم", "عدد الموظفين في قسم الدعم الفني", "سعة التخزين السحابي للشركة"], correct: 1, explanation: "الاحتمالية تقيس مدى رجحان وقوع الحدث." },
+            { id: 82, text: "لماذا قد يحدث أحياناً 'تداخل أو تكرار' بين مراحل الاستجابة الست في الواقع العملي؟", options: ["بسبب خطأ في قراءة الساعة", "لأن مرحلة الاستعادة قد تكشف عن بقايا للتهديد تستلزم العودة مؤقتاً للاحتواء أو الاستئصال", "لأن المراحل مجرد نظريات لا تنفذ أبداً", "لأن البرمجيات الخبيثة تختفي وحدها"], correct: 1, explanation: "الاستجابة الحقيقية مرنة وقد تتطلب العودة لخطوات سابقة إذا ظهرت بقايا للتهديد." },
+            { id: 83, text: "ما هو الإجراء الذي يمثل مرحلة 'الاستئصال' (Eradication) في حالة إصابة خادم ببرمجية فدية؟", options: ["فصل الخادم عن الشبكة", "إزالة التهديد ومسبباته، مثل حذف البرمجيات الخبيثة ومعالجة الثغرة الأمنية المستغلة", "إعادة تشغيل الراوتر فقط", "إرسال رسالة شكر للمخترق"], correct: 1, explanation: "الاستئصال يزيل أصل التهديد والثغرة بشكل تام." },
+            { id: 84, text: "أي من الآتي يُعد مثالاً على 'التلاعب بالبيانات' كحادث أمني؟", options: ["انقطاع التيار الكهربائي عن مبنى الإدارة", "تغيير قيم مالية أو سجلات داخل نظام دون تصريح مسبق", "سرقة شاشات العرض من المكاتب", "نسخ البرامج الترفيهية"], correct: 1, explanation: "التلاعب بالبيانات يعني تعديلها غير المصرح به، مما يمس سلامة البيانات (Integrity)." },
+            { id: 85, text: "ما هو الهدف من مرحلة 'الاكتشاف' (Detection) في التعامل مع الحوادث؟", options: ["كشف وتأكيد وقوع حادث أمني في النظام بأسرع وقت ممكن", "منع الموظفين من دخول الشركة", "شراء أجهزة رصد حراري", "تحديث برامج النصوص العادية"], correct: 0, explanation: "الاكتشاف يختص برصد وتأكيد حدوث الخرق أو الحادث الأمني." },
+            { id: 86, text: "إذا كانت المخاطر لها 'تأثير كبير واحتمالية منخفضة'، فكيف يتم التعامل معها في المنهج المبسط؟", options: ["تُهمل تماماً ولا يُنظر إليها", "تُعالج بحسب درجات المصفوفة والسياسات المتاحة بعد الفئة القصوى", "تتطلب تدمير أجهزة الشركة", "تعتبر خطيرة جداً وتأتي بالمرتبة الأولى دائماً"], correct: 1, explanation: "أعلى أولوية هي مرتفع-مرتفع، بينما البقية ترتب حسب المصفوفة والسياق." },
+            { id: 87, text: "ما الأثر المترتب على بدء مرحلة 'الاستعادة' قبل إتمام مرحلة 'استئصال' التهديد وإزالة البرمجية الخبيثة؟", options: ["تنجح الاستعادة بسرعة فائقة", "ستعود البرمجية الخبيثة لتخريب النظام المستعاد مرة أخرى، مما يضطر الفريق للعودة للوراء", "يتم حل المشكلة للأبد", "تزداد سرعة الإنترنت"], correct: 1, explanation: "بدء الاستعادة قبل إزالة أصل التهديد يعيد تفعيل الهجوم مجدداً." },
+            { id: 88, text: "أي من الخيارات التالية يمثل حادثاً أمنياً متعلقاً بـ 'تسرب المعلومات'؟", options: ["تعطل خادم الويب بسبب ضغط الزيارات", "تسرب قواعد بيانات العملاء السرية وسرقة الملفات للخارج", "تلف أسلاك الإنترنت النحاسية", "تغيير خلفية الشاشة للموظف"], correct: 1, explanation: "تسرب المعلومات يمس سرية البيانات (Confidentiality)." },
+            { id: 89, text: "ما هي الأهمية العملية لتوثيق الاستجابة للحوادث وإعداد خطط التحضير المسبق؟", options: ["زيادة أوراق الملفات بالمكتب", "تقليص زمن الاستجابة، تقليل حجم الأضرار، وتوجيه جهود الفريق بكفاءة عند وقوع الأزمة", "منع حدوث أي هجوم سيبراني في الكون", "إرضاء الجهات الحكومية شكلياً"], correct: 1, explanation: "التخطيط المسبق يسرع الاستجابة ويقلل الخسائر بفعالية." },
+            { id: 90, text: "كيف يسهم 'تقييم المخاطر' في توجيه موارد وقدرات فريق أمن المعلومات المحدودة؟", options: ["عبر توزيع الجهود على كل المخاطر بالتساوي مهما كانت تافهة", "عبر التركيز ومعالجة المخاطر ذات الأولوية القصوى (التأثير العالي والاحتمالية العالية) أولاً", "عبر ترك العمل حتى تقع الكارثة", "عبر منع تصفح المواقع الإخبارية"], correct: 1, explanation: "تقييم المخاطر يحدد الأولويات لتركيز الموارد المتاحة على الأخطار الأشد خطورة." },
+            { id: 91, text: "ماذا تفعل إذا اكتشف فريق الأمن السيبراني اختراقاً جارياً لجهاز خادم رئيسي؟", options: ["يقومون بفصله أو عزله فوراً كإجراء احتواء لمنع انتشار الضرر للشبكة", "يتركونه يعمل حتى ينتهي المخترق", "يقومون بنشر تفاصيل الاختراق على السوشيال ميديا", "يغلقون أجهزة الإضاءة بالشركة"], correct: 0, explanation: "عزل الجهاز المصاب هو إجراء احتواء أساسي وسريع." },
+            { id: 92, text: "أي من مراحل الاستجابة الست تُعنى بفحص الثغرة الأمنية التي سمحت بوقوع الاختراق وإغلاقها نهائياً؟", options: ["مرحلة الاستئصال (Eradication)", "مرحلة الاكتشاف", "مرحلة التحضير", "مرحلة الاستعادة"], correct: 0, explanation: "الاستئصال يزيل مسببات التهديد والثغرة التي استُغلت." },
+            { id: 93, text: "لماذا يُعد توثيق الخطوات المتخذة أثناء معالجة حادث أمني أمراً بالغ الأهمية؟", options: ["لاستخدامه في التحقيقات، وتحسين خطط التحضير المستقبلية، والاستفادة منه في مرحلة الدروس المستفادة", "لبيعه للشركات المنافسة", "لزيادة حجم الذاكرة بالتخزين", "لإلغاء التقارير الشهرية"], correct: 0, explanation: "التوثيق يدعم التعلم المستمر والتحسين وتطوير خطط التحضير." },
+            { id: 94, text: "ما العلاقة بين الأمن الوقائي (مثل جدران الحماية والتشفير) وبين الاستجابة للحوادث؟", options: ["كلاهما يعملان معاً، فالأمن الوقائي يقلل فرص وقوع الحوادث، والاستجابة تتعامل بكفاءة مع ما قد ينجح في اختراقه", "الاستجابة تلغي الحاجة لأي أمن وقائي نهائياً", "الأمن الوقائي مخصص للمنزل والاستجابة للشركات", "لا يوجد أي صلة بينهما"], correct: 0, explanation: "الوقاية تقلل المخاطر، والاستجابة تتولى التعامل مع الحوادث التي تتجاوز خطوط الدفاع." },
+            { id: 95, text: "أي من الخيارات التالية يمثل مثالاً ممتازاً للدرس المستفاد بعد هجوم ناجح استغل كلمة مرور ضعيفة؟", options: ["تغيير موظفي الشركة بالكامل", "فرض سياسة كلمات مرور معقدة وتفعيل المصادقة الثنائية (2FA) لجميع الحسابات", "إلغاء استخدام كلمات المرور واستخدام الأوراق", "تخفيض سرعة الإنترنت"], correct: 1, explanation: "الدرس المستفاد يعالج الثغرة التنظيمية أو التقنية المتسببة بالحادث." },
+            { id: 96, text: "ما هو المعيار المعتمد لتحديد نجاح مرحلة 'الاستعادة' (Recovery)؟", options: ["عودة كافة الأنظمة والخدمات للعمل بصورة آمنة ومستقرة وطبيعية دون ظهور آثار للضرر", "إلغاء عقود موظفي الدعم الفني", "تغيير أثاث غرفة الخوادم", "شراء أجهزة حديثة باهظة الثمن"], correct: 0, explanation: "الاستعادة تنجح بعودة الخدمات لعملها الطبيعي الآمن." },
+            { id: 97, text: "كيف تساعد خطة الاحتواء الفعالة في تقليل 'التأثير' (Impact) للحادث؟", options: ["عبر حصر الضرر في أضيق نطاق ممكن ومنع تمدده لبقية أنظمة وقواعد بيانات المؤسسة", "عبر زيادة عدد المخترقين", "عبر تسريع سرعة المعالجات", "عبر إلغاء تشفير البيانات"], correct: 0, explanation: "حصر الضرر يقلل حجم الخسارة الإجمالية (التأثير)." },
+            { id: 98, text: "ماذا يقصد بـ 'إدارة المخاطر' في سياق الأمن السيبراني؟", options: ["تجاهل التهديدات تماماً", "عملية تقييم الأصول، تحديد التهديدات، قياس المخاطر وترتيب أولوياتها لمعالجتها بكفاءة", "منع الشركات من الاستثمار التقني", "شراء تأمين ضد الحريق فقط"], correct: 1, explanation: "إدارة المخاطر تشمل التقييم والقياس والتوجيه نحو المعالجة." },
+            { id: 99, text: "إذا تساوت درجتان للخطر في مصفوفة المخاطر، فبأي معيار يتم الاستعانة لتحديد أيهما يُعالج أولاً؟", options: ["بحسب السياق التشغيلي، طبيعة الأصول المتأثرة، ومدى توفر الضوابط والموارد الفورية", "بحسب الحروف الأبجدية لاسم المهاجم", "بحسب لون أجهزة الحاسوب المصابة", "يتم تركهما وعدم معالجتهما"], correct: 0, explanation: "السياق وأهمية الأصول المتاحة تحدد الأولوية عند تساوي درجات المصفوفة." },
+            { id: 100, text: "ما هي الخلاصة التربوية لدرس الاستجابة للحوادث وإدارة المخاطر؟", options: ["أن الحوادث لا يمكن تجنبها كلياً، لذا فإن الجاهزية عبر المراحل الست وتقييم المخاطر بذكاء يحدان من الأثر ويضمنان التحسين المستمر", "أن التكنولوجيا لا تحتاج لصيانة", "أن الاعتماد على الحظ يكفي لحماية الشبكات", "أن الاستجابة تبدأ وتنتهي بمرحلة الاكتشاف فقط"], correct: 0, explanation: "الخلاصة هي أهمية الجاهزية المنظمة عبر المراحل الست والتقييم المستمر للحد من الأضرار." }
+        ];
+
+        let userAnswers = {};
+        let currentQIndex = 0;
+        let studentName = '';
+
+        function goToNameEntry() {
+            document.getElementById('screen-landing').classList.add('hidden');
+            document.getElementById('screen-name-entry').classList.remove('hidden');
+        }
+
+        async function startAssessment(e) {
+            e.preventDefault();
+            const name = document.getElementById('input-name').value.trim();
+
+            if (!name) {
+                showModal('تنبيه هام', 'الرجاء إدخال اسم الطالب أولاً.');
+                return;
+            }
+
+            studentName = name;
+
+            document.getElementById('hdr-name').innerText = name;
+            document.getElementById('user-header-info').classList.remove('hidden');
+            document.getElementById('user-header-info').classList.add('flex');
+
+            document.getElementById('screen-name-entry').classList.add('hidden');
+            document.getElementById('screen-main-platform').classList.remove('hidden');
+
+            renderQuestion(0);
+            renderMatrixGrid();
+            updateStats();
+        }
+
+        function confirmExit() {
+            showModal('تأكيد الخروج', 'هل أنت متأكد من إنهاء المراجعة والعودة للبداية؟', true, () => {
+                resetPlatform();
+            });
+        }
+
+        function resetPlatform() {
+            userAnswers = {};
+            currentQIndex = 0;
+            document.getElementById('user-header-info').classList.remove('flex');
+            document.getElementById('user-header-info').classList.add('hidden');
+            document.getElementById('screen-main-platform').classList.add('hidden');
+            document.getElementById('screen-results').classList.add('hidden');
+            document.getElementById('screen-landing').classList.remove('hidden');
+            document.getElementById('student-form').reset();
+        }
+
+        function renderQuestion(index) {
+            currentQIndex = index;
+            const q = questionsData[index];
+
+            document.getElementById('q-badge').innerText = 'السؤال رقم ' + (index + 1) + ' من 100';
+            document.getElementById('q-text').innerText = q.text;
+
+            const optionsContainer = document.getElementById('q-options');
+            optionsContainer.innerHTML = '';
+
+            q.options.forEach((opt, optIdx) => {
+                const isSelected = userAnswers[index] === optIdx;
+                const btnClass = isSelected 
+                    ? 'bg-brandOrange/10 border-brandOrange text-brandNavy font-bold' 
+                    : 'bg-slate-50 border-slate-200 hover:bg-slate-100 text-slate-700';
+
+                const div = document.createElement('div');
+                div.className = 'p-4 rounded-xl border cursor-pointer transition flex items-center justify-between text-sm sm:text-base ' + btnClass;
+                div.onclick = () => selectAnswer(index, optIdx);
+                div.innerHTML = `
+                    <div class="flex items-center space-x-3 space-x-reverse">
+                        <span class="w-7 h-7 rounded-lg bg-white border border-slate-300 flex items-center justify-center text-xs font-bold ${isSelected ? 'bg-brandOrange text-white border-brandOrange' : 'text-slate-500'}">${String.fromCharCode(1575 + optIdx)}</span>
+                        <span>${opt}</span>
+                    </div>
+                    ${isSelected ? '<i class="fa-solid fa-circle-check text-brandOrange text-lg"></i>' : ''}
+                `;
+                optionsContainer.appendChild(div);
+            });
+
+            renderMatrixGrid();
+            updateStats();
+        }
+
+        function selectAnswer(qIdx, optIdx) {
+            userAnswers[qIdx] = optIdx;
+            renderQuestion(qIdx);
+            renderMatrixGrid();
+            updateStats();
+        }
+
+        function nextQuestion() {
+            if (currentQIndex < questionsData.length - 1) {
+                renderQuestion(currentQIndex + 1);
+            } else {
+                showModal('نهاية الأسئلة', 'لقد وصلت إلى السؤال الأخير (100). يمكنك مراجعة إجاباتك أو الضغط على زر إنهاء المراجعة أعلى الصفحة.');
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQIndex > 0) {
+                renderQuestion(currentQIndex - 1);
+            }
+        }
+
+        function renderMatrixGrid() {
+            const grid = document.getElementById('matrix-grid');
+            grid.innerHTML = '';
+
+            questionsData.forEach((q, idx) => {
+                const isAnswered = userAnswers[idx] !== undefined;
+                const isCurrent = currentQIndex === idx;
+
+                let bgClass = 'bg-slate-100 text-slate-600 border-slate-200';
+                if (isAnswered) {
+                    bgClass = 'bg-brandOrange text-white border-brandOrange font-bold';
+                }
+                if (isCurrent) {
+                    bgClass += ' ring-2 ring-brandNavy ring-offset-1';
+                }
+
+                const btn = document.createElement('button');
+                btn.className = 'w-full h-8 rounded-lg text-xs font-bold border transition flex items-center justify-center ' + bgClass;
+                btn.innerText = idx + 1;
+                btn.onclick = () => renderQuestion(idx);
+                grid.appendChild(btn);
+            });
+        }
+
+        function updateStats() {
+            const answeredCount = Object.keys(userAnswers).length;
+            document.getElementById('answered-count').innerText = answeredCount;
+            document.getElementById('stat-answered').innerText = answeredCount + ' / 100';
+        }
+
+        async function finishAssessment() {
+            const answeredCount = Object.keys(userAnswers).length;
+            if (answeredCount < 100) {
+                showModal('تنبيه غير منتهي', 'لم تقم بالإجابة سوى على ' + answeredCount + ' من أصل 100 سؤال. هل أنت متأكد من رغبتك في إنهاء المراجعة ورصد النتيجة؟', true, () => {
+                    processResults();
+                });
+            } else {
+                processResults();
+            }
+        }
+
+        async function processResults() {
+            let score = 0;
+            let wrongCount = 0;
+            questionsData.forEach((q, idx) => {
+                if (userAnswers[idx] === q.correct) {
+                    score++;
+                } else {
+                    wrongCount++;
+                }
+            });
+
+            const percentage = score;
+            const dateStr = new Date().toLocaleDateString('ar-EG', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+            document.getElementById('screen-main-platform').classList.add('hidden');
+            document.getElementById('screen-results').classList.remove('hidden');
+
+            document.getElementById('student-summary-info').innerHTML = 'الطالب الكريم: <span class="text-brandNavy font-bold">' + studentName + '</span> | تاريخ التسليم: <span class="text-slate-700">' + dateStr + '</span>';
+            document.getElementById('final-score').innerText = score;
+            document.getElementById('res-correct-count').innerText = score;
+            document.getElementById('res-wrong-count').innerText = wrongCount;
+            document.getElementById('final-percentage').innerText = percentage + '%';
+
+            renderResultsMatrix();
+
+            const badgeIcon = document.getElementById('result-badge-icon');
+            const pedMsg = document.getElementById('pedagogical-message');
+
+            if (percentage >= 95) {
+                badgeIcon.innerHTML = '<i class="fa-solid fa-star"></i>';
+                pedMsg.innerHTML = '🌟 <strong>ممتاز!</strong> أداء رائع ومستوى متميز في استيعاب مفاهيم الوحدة الثانية (الأمن السيبراني). استمر في هذا المستوى العالي من التميز والفهم.';
+            } else if (percentage >= 90) {
+                badgeIcon.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+                pedMsg.innerHTML = '👍 <strong>جيد جداً!</strong> نتيجتك طيبة ومستواك ممتاز، لديك حصيلة قوية في مفاهيم التشفير وأمان الشبكات، راجع التأصيل العلمي للأخطاء البسيطة لتبلغ قمة التميز.';
+            } else {
+                badgeIcon.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i>';
+                pedMsg.innerHTML = '⚠️ لقد أظهرت النتيجة بعض النقاط في الوحدة الثانية التي تحتاج إلى تركيز ومراجعة أفضل. محتاج تراجع تاني وتظبط أمورك في المراجعة واقرأ التأصيل العلمي والشرح الكامل لتثبيت المعلومات بدقة.';
+            }
+        }
+
+        function renderResultsMatrix() {
+            const grid = document.getElementById('results-matrix-grid');
+            grid.innerHTML = '';
+
+            questionsData.forEach((q, idx) => {
+                const userAnsIdx = userAnswers[idx];
+                const isCorrect = userAnsIdx === q.correct;
+                
+                let bgClass = isCorrect ? 'bg-emerald-500 text-white border-emerald-600' : 'bg-rose-500 text-white border-rose-600';
+
+                const btn = document.createElement('div');
+                btn.className = 'w-7 h-7 rounded-md text-[11px] font-bold border transition flex items-center justify-center ' + bgClass;
+                btn.innerText = idx + 1;
+                btn.title = isCorrect ? `السؤال ${idx + 1}: صحيح` : `السؤال ${idx + 1}: خطأ أو متروك`;
+                grid.appendChild(btn);
+            });
+        }
+
+        window.reviewAllAnswers = function(mode) {
+            let html = '';
+            let count = 0;
+
+            questionsData.forEach((q, idx) => {
+                const userAnsIdx = userAnswers[idx];
+                const isCorrect = userAnsIdx === q.correct;
+
+                if (mode === 'wrong' && isCorrect) return;
+                count++;
+
+                const userAnsText = userAnsIdx !== undefined ? q.options[userAnsIdx] : 'لم تتم الإجابة';
+                const correctAnsText = q.options[q.correct];
+
+                const statusColor = isCorrect ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-rose-50 text-rose-700 border-rose-200';
+                const iconSymbol = isCorrect ? '<i class="fa-solid fa-circle-check text-emerald-600 ml-1"></i> إجابة صحيحة' : '<i class="fa-solid fa-circle-xmark text-rose-600 ml-1"></i> إجابتك غير دقيقة أو متروكة';
+
+                html += `
+                    <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-xs font-bold text-brandOrange">السؤال رقم ${idx + 1}</span>
+                            <span class="text-xs font-bold px-2.5 py-0.5 rounded-lg border ${statusColor}">${iconSymbol}</span>
+                        </div>
+                        <div class="text-sm font-bold text-brandNavy mb-2">${q.text}</div>
+                        <div class="text-xs text-slate-700 mb-1">👤 إجابتك: ${userAnsText}</div>
+                        <div class="text-xs text-brandNavy font-bold mb-2">✔️ الإجابة الصحيحة المعتمدة: ${correctAnsText}</div>
+                        <div class="text-xs text-slate-600 bg-white p-3 rounded-xl border border-slate-200 leading-relaxed">
+                            <strong>التأصيل العلمي والشرح الكامل:</strong> ${q.explanation}
+                        </div>
+                    </div>
+                `;
+            });
+
+            if (count === 0 && mode === 'wrong') {
+                html = '<div class="text-center py-8 text-emerald-600 font-bold text-base"><i class="fa-solid fa-trophy text-4xl mb-2"></i><br>رائع جداً! لا توجد أي أخطاء لديك. أجبت على جميع الأسئلة بصورة صحيحة تماماً!</div>';
+            }
+
+            document.getElementById('review-modal-title').innerText = mode === 'wrong' ? 'مراجعة أخطائي فقط والتأصيل العلمي' : 'مراجعة جميع الأسئلة والتأصيل العلمي والشرح الكامل (100 سؤال)';
+            document.getElementById('review-modal-body').innerHTML = html;
+            document.getElementById('review-modal').classList.remove('hidden');
+        };
+
+        window.closeReviewModal = function() {
+            document.getElementById('review-modal').classList.add('hidden');
+        };
+
+        function showModal(title, message, isConfirm = false, onConfirm = null) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-message').innerText = message;
+            
+            const btnContainer = document.getElementById('modal-buttons');
+            btnContainer.innerHTML = '';
+
+            if (isConfirm) {
+                const btnCancel = document.createElement('button');
+                btnCancel.className = 'px-4 py-2 bg-slate-100 text-brandNavy font-bold rounded-xl text-xs hover:bg-slate-200 transition';
+                btnCancel.innerText = 'إلغاء';
+                btnCancel.onclick = closeModal;
+
+                const btnOk = document.createElement('button');
+                btnOk.className = 'px-4 py-2 bg-brandOrange text-white font-bold rounded-xl text-xs hover:bg-brandOrange-dark transition';
+                btnOk.innerText = 'تأكيد';
+                btnOk.onclick = () => {
+                    closeModal();
+                    if (onConfirm) onConfirm();
+                };
+
+                btnContainer.appendChild(btnCancel);
+                btnContainer.appendChild(btnOk);
+            } else {
+                const btnOk = document.createElement('button');
+                btnOk.className = 'px-5 py-2 bg-brandNavy text-white font-bold rounded-xl text-xs';
+                btnOk.innerText = 'حسناً';
+                btnOk.onclick = closeModal;
+                btnContainer.appendChild(btnOk);
+            }
+
+            document.getElementById('custom-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('custom-modal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
